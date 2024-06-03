@@ -31,6 +31,7 @@ def get_score(guess,answer):
             score[i]="Y"
     return arr_to_word(score)
 
+## USE THIS FUNCTION TO CREATE THE GRAPH BEFORE SOLVING WORDLES
 def save_graph():
     t1=time.time()
     g={}
