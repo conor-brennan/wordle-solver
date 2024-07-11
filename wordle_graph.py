@@ -2,7 +2,6 @@ from words_setup import load_words
 import numpy as np
 import time
 import ujson
-import os
 
 guess_words = load_words("wordle_guess.txt",case="lower")
 possible_words = load_words("wordle_dict.txt",case="lower")
@@ -58,11 +57,12 @@ def load_graph(graph_path="words/wordle_graph.txt"):
     with open(graph_path, 'r') as file:
         return ujson.load(file)
 
-try:
-    full_graph=load_graph()
-except FileNotFoundError:
-    print("Could not load word graph. Please ensure graph has been computed and saved.")
-    full_graph = None
+full_graph = None
+if __name__ == "__main__":
+    try:
+        full_graph=load_graph()
+    except FileNotFoundError:
+        print("Could not load word graph. Please ensure graph has been computed and saved.")
     
 def greedy_info_gain(graph=full_graph,num_words=25):
     t1=time.time()
