@@ -2,6 +2,7 @@ from words_setup import load_words
 import numpy as np
 import time
 import ujson
+import os
 
 guess_words = load_words("wordle_guess.txt",case="lower")
 possible_words = load_words("wordle_dict.txt",case="lower")
@@ -32,10 +33,10 @@ def get_score(guess,answer):
     return arr_to_word(score)
 
 ## USE THIS FUNCTION TO CREATE THE GRAPH BEFORE SOLVING WORDLES
-def save_graph():
+def save_graph(graph_path="words/wordle_graph.txt"):
     t1=time.time()
     g={}
-    with open("words/wordle_graph.txt", "w") as file:
+    with open(graph_path, "w") as file:
         i=0
         for wg in guess_words:
             g[wg] = {}
@@ -53,12 +54,16 @@ def save_graph():
         print(f"{t2-t1} seconds, or {(t2-t1-(t2-t1)%60)/60} mins {(t2-t1)%60} secs")
         ujson.dump(g,file)
 
-def load_graph():
-    with open('words/wordle_graph.txt', 'r') as file:
+def load_graph(graph_path="words/wordle_graph.txt"):
+    with open(graph_path, 'r') as file:
         return ujson.load(file)
 
-full_graph=load_graph()
-
+try:
+    full_graph=load_graph()
+except FileNotFoundError:
+    print("Could not load word graph. Please ensure graph has been computed and saved.")
+    full_graph = None
+    
 def greedy_info_gain(graph=full_graph,num_words=25):
     t1=time.time()
     guesses=list(graph.keys())
