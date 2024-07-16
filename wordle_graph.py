@@ -31,13 +31,17 @@ def get_score(guess,answer):
             score[i]="Y"
     return arr_to_word(score)
 
-## USE THIS FUNCTION TO CREATE THE GRAPH BEFORE SOLVING WORDLES
-def save_graph(graph_path="words/wordle_graph.txt"):
+## USE THIS FUNCTION TO CREATE THE GRAPHS BEFORE SOLVING WORDLES
+def save_graph(graph_path="words/wordle_graph_full.txt",hard=False):
     t1=time.time()
     g={}
+    if hard:
+        guesses = possible_words
+    else:
+        guesses = guess_words
     with open(graph_path, "w") as file:
         i=0
-        for wg in guess_words:
+        for wg in guesses:
             g[wg] = {}
             for wp in possible_words:
                 score=get_score(wg,wp)
@@ -53,14 +57,19 @@ def save_graph(graph_path="words/wordle_graph.txt"):
         print(f"{t2-t1} seconds, or {(t2-t1-(t2-t1)%60)/60} mins {(t2-t1)%60} secs")
         ujson.dump(g,file)
 
-def load_graph(graph_path="words/wordle_graph.txt"):
+def load_graph(graph_path="words/wordle_graph_full.txt",hard=False):
+    if hard:
+        with open("words/wordle_graph_hard.txt", 'r') as file:
+            return ujson.load(file)
     with open(graph_path, 'r') as file:
         return ujson.load(file)
 
 full_graph = None
+hard_graph = None
 if __name__ == "__main__":
     try:
         full_graph=load_graph()
+        hard_graph=load_graph(hard=True)
     except FileNotFoundError:
         print("Could not load word graph. Please ensure graph has been computed and saved.")
     
