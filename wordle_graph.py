@@ -32,13 +32,12 @@ def get_score(guess,answer):
     return arr_to_word(score)
 
 ## USE THIS FUNCTION TO CREATE THE GRAPHS BEFORE SOLVING WORDLES
-def save_graph(graph_path="words/wordle_graph_full.txt",hard=False):
+# this took 1 minute on my laptop
+# the file is 249 MB
+def save_graph(graph_path="words/wordle_graph_full.txt"):
     t1=time.time()
     g={}
-    if hard:
-        guesses = possible_words
-    else:
-        guesses = guess_words
+    guesses = guess_words
     with open(graph_path, "w") as file:
         i=0
         for wg in guesses:
@@ -65,11 +64,9 @@ def load_graph(graph_path="words/wordle_graph_full.txt",hard=False):
         return ujson.load(file)
 
 full_graph = None
-hard_graph = None
 if __name__ == "__main__":
     try:
         full_graph=load_graph()
-        hard_graph=load_graph(hard=True)
     except FileNotFoundError:
         print("Could not load word graph. Please ensure graph has been computed and saved.")
     
@@ -91,7 +88,7 @@ def greedy_info_gain(graph=full_graph,num_words=25):
         for score in scores:
             info+=(len(graph[wg][score])/n)*np.log2(n/len(graph[wg][score]))
         infos.append([wg,info])
-        if w in pws.keys():
+        if w in pws.keys(): # is this a bug? should this be wg??
             pws[w]=info
     infos_sorted = sorted(infos, key=lambda x:x[1])[::-1]
     for w in pws.keys():
@@ -136,7 +133,7 @@ def avg_from_scores(scores):
     return n/d
     
 
-def avg_score(starting_word='soare'):
+def greedy_avg_score(starting_word='soare'):
     scores={1:[],2:[],3:[],4:[],5:[],6:[],"Lose":[]}
     i=0
     t1=time.time()
@@ -168,7 +165,7 @@ def avg_score(starting_word='soare'):
     return scores
 
 """
-## LEADERBOARD ##
+## INFO GAIN LEADERBOARD ##
 1. salet - 3.54255
 2. soare - 3.58056
 """
