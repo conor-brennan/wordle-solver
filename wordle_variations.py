@@ -225,14 +225,26 @@ def hard_avg_score(strategy, starting_word=""):
 
 """
 ## INFO GAIN LEADERBOARD ##
-1. plate - 3.60623, 4 fails (['joker', 'hatch', 'daunt', 'mound'])
-2. soare - 3.64471, 7 fails (['daunt', 'jaunt', 'score', 'mound', 'hatch', 'golly', 'patch'])
-3. cable - 3.65108, 5 fails (['rover', 'joker', 'daunt', 'foyer', 'shade'])
+1. salet - 3.51732, 5 fails (['match', 'hound', 'pound', 'fight', 'boxer'])
+2. torse - 3.54541, 3 fails (['shade', 'patch', 'latch'])
+2. plate - 3.60623, 4 fails (['joker', 'hatch', 'daunt', 'mound'])
+3. soare - 3.64471, 7 fails (['daunt', 'jaunt', 'score', 'mound', 'hatch', 'golly', 'patch'])
+4. cable - 3.65108, 5 fails (['rover', 'joker', 'daunt', 'foyer', 'shade'])
 """
 
 """
 ## AVG CLUSTER LEADERBOARD ##
-1. soare - 3.58803, 9 fails (['gaunt', 'patty', 'vaunt', 'maker', 'spore', 'wafer', 'cower', 'watch', 'match'])
+1. salet - 3.51300, 7 fails (['boxer', 'match', 'blank', 'wound', 'fight', 'daunt', 'bound'])
+2. trace - 3.51410, 10 fails (['boxer', 'goner', 'purer', 'filly', 'foyer', 'latch', 'holly', 'match', 'vaunt', 'baker'])
+3. soare - 3.58803, 9 fails (['gaunt', 'patty', 'vaunt', 'maker', 'spore', 'wafer', 'cower', 'watch', 'match'])
+"""
+
+"""
+## WEIGHTED CLUSTER LEADERBOARD ##
+1. salet - 3.51667, 6 fails (['boxer', 'patch', 'wound', 'fight', 'daunt', 'bound'])
+2. plate - 3.54888, 3 fails (['foyer', 'watch', 'vaunt'])
+2. raise - 3.57726, 11 fails (['vaunt', 'poker', 'might', 'graze', 'hater', 'dilly', 'match', 'swore', 'goner', 'latch', 'gaunt'])
+3. cable - 3.59584, 4 fails (['goner', 'vaunt', 'joker', 'shade'])
 """
 
 ## Good info gain words
